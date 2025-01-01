@@ -8,12 +8,12 @@ gem "rails", "~> 7.1.4", ">= 7.1.4.1"
 # LLM
 gem "ruby-openai"
 
-# Use sqlite3 as the database for Active Record
+# SYSTEM GEMS
 gem "sqlite3", ">= 1.4"
-
-# Use the Puma web server [https://github.com/puma/puma]
 gem "puma", ">= 5.0"
 gem "dotenv-rails"
+gem "rack-cors", require: "rack/cors"
+
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 # gem "jbuilder"
 
@@ -27,7 +27,7 @@ gem "dotenv-rails"
 # gem "bcrypt", "~> 3.1.7"
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem "tzinfo-data", platforms: %i[windows jruby]
+gem "tzinfo-data", platforms: %i[mingw mswin x64_mingw jruby]
 
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", require: false
@@ -40,7 +40,6 @@ gem "bootsnap", require: false
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
-  gem "debug", platforms: %i[mri windows]
   gem "rspec-rails", "~> 6.0"
   gem "webmock", require: false
   gem "vcr", require: false

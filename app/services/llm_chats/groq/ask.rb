@@ -6,6 +6,7 @@ module LlmChats
       BASE_MODEL = "llama3-8b-8192"
       ALLOWED_ROLES = %w[user assistant]
       ALLOWED_PARSED_RESPONSE_TYPES = %w[json text raw]
+
       def initialize(client: ::ExternalServices::Llm::Chat::Groq.client)
         super
       end

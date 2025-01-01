@@ -2,6 +2,7 @@ module LlmChats
   module Groq
     class ParseResponse < LlmChats::Base
       attr_reader :response
+
       def initialize(response:)
         @response = response
       end
