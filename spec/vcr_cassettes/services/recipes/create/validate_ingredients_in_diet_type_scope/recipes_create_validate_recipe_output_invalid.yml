@@ -1,0 +1,91 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.groq.com/openai/v1/chat/completions
+    body:
+      encoding: UTF-8
+      string: '{"model":"llama3-8b-8192","response_format":{"type":"json_object"},"messages":[{"role":"user","content":"You
+        are a strict validator of the following LLM output:\n\n{\"some\"=\u003e\"invalid
+        data\"}\n\nThe valid output must be in **pure JSON** with EXACTLY one of these
+        formats:\n\n1) **Failure format** (if the recipe can''t be built or an error
+        occurred):\n{\n  \"fail\": \"Short explanation\"\n}\n\n\n**Validation Rules**:\n-
+        The response must be valid JSON (no extra text, no markdown).\n- If it''s
+        the recipe format, all keys (title, description, ingredients, steps) HAVE
+        TO be present.\n  - \"ingredients\" must be an array of objects, each with
+        \"quantity\" and \"name\".\n  - \"steps\" must be an array of objects, each
+        with \"step\".\n- If it''s the failure format, ONLY the \"fail\" key with
+        a short explanation string is allowed.\n- No extra keys are allowed in either
+        format.\n- Any other structure or missing fields is invalid.\n\nNow, **strictly**
+        check if the above LLM output is valid or not. Return ONLY one of these two
+        JSON objects:\n\n1. If the LLM output is fully valid:\n{\n  \"valid\": true\n}\n\n2.
+        If the LLM output is invalid (not JSON, missing fields, extra keys, or nonsense):\n{\n  \"valid\":
+        false,\n  \"reasons\": [\n    \"reason explaining what went wrong\",\n    ...\n  ]\n}\n\nNo
+        extra text or formatting—return ONLY one of these two JSON objects.\n"}],"temperature":0.7}'
+    headers:
+      Content-Type:
+      - application/json
+      Authorization:
+      - Bearer <OPENAI_GROQ_API_KEY>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 02 Jan 2025 11:23:13 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Cf-Ray:
+      - 8fba602cfcf60258-WAW
+      Cf-Cache-Status:
+      - DYNAMIC
+      Cache-Control:
+      - private, max-age=0, no-store, no-cache, must-revalidate
+      Vary:
+      - Origin, Accept-Encoding
+      Via:
+      - 1.1 google
+      Alt-Svc:
+      - h3=":443"; ma=86400
+      X-Groq-Region:
+      - us-west-1
+      X-Ratelimit-Limit-Requests:
+      - '14400'
+      X-Ratelimit-Limit-Tokens:
+      - '30000'
+      X-Ratelimit-Remaining-Requests:
+      - '14392'
+      X-Ratelimit-Remaining-Tokens:
+      - '27723'
+      X-Ratelimit-Reset-Requests:
+      - 47.592s
+      X-Ratelimit-Reset-Tokens:
+      - 4.553s
+      X-Request-Id:
+      - req_01jgkc2p4efjttpy26r1c6vj2k
+      Set-Cookie:
+      - __cf_bm=tNRfthWKwz00QOqlbaGRTefuJASgyJjkTKeiU5gZBz8-1735816993-1.0.1.1-dk2AZL4NVkMJ7rfJTP3hTvULa4N_2PFdibcUlVVqhk89OgPBtJhySnNpw5dOFenctJQFYUcxnpiRz6_rdKjGiQ;
+        path=/; expires=Thu, 02-Jan-25 11:53:13 GMT; domain=.groq.com; HttpOnly; Secure;
+        SameSite=None
+      Server:
+      - cloudflare
+    body:
+      encoding: ASCII-8BIT
+      string: '{"id":"chatcmpl-9b7a13f3-8033-4224-bef8-9cec09bf211e","object":"chat.completion","created":1735816992,"model":"llama3-8b-8192","choices":[{"index":0,"message":{"role":"assistant","content":"{\n   \"valid\":false,\n   \"reasons\":[\n      \"The
+        response is not in the expected recipe or failure format.\",\n      \"Invalid
+        JSON structure.\"\n   ]\n}"},"logprobs":null,"finish_reason":"stop"}],"usage":{"queue_time":0.019347594000000003,"prompt_tokens":330,"prompt_time":0.039738866,"completion_tokens":36,"completion_time":0.03,"total_tokens":366,"total_time":0.069738866},"system_fingerprint":"fp_a97cfe35ae","x_groq":{"id":"req_01jgkc2p4efjttpy26r1c6vj2k"}}
+
+        '
+  recorded_at: Thu, 02 Jan 2025 11:23:13 GMT
+recorded_with: VCR 6.3.1

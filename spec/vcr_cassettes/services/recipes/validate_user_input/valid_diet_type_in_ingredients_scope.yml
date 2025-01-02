@@ -1,0 +1,97 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.groq.com/openai/v1/chat/completions
+    body:
+      encoding: UTF-8
+      string: '{"model":"llama3-8b-8192","response_format":{"type":"json_object"},"messages":[{"role":"user","content":"You
+        are an experienced chef and a strict validator.\n\nThe user provided the following:\n-
+        Ingredients: [\"tomato\", \"cucumber\", \"eggs\"]\n- Diet Type: \"keto\"\n\nYou
+        must validate in three steps, returning **only** a JSON object. Absolutely
+        no additional text.\n\n---\n**STEP 1: Validate INGREDIENTS for edibility**\n-
+        For each item in `ingredients`, check if it is a recognized edible grocery
+        product (produce, meats, fish, eggs, tofu, grains, dairy, spices, condiments,
+        oils, etc.).\n- Mark obviously inedible/nonsensical items (e.g., \"macbook,\"
+        \"car tyre,\" \"rock,\" \"laptop\") as invalid.\n- It''s very important for
+        us to be sure that we will create recipe only from valid ingredients!\n- If
+        ANY `ingredient` fails, return immediately:\n  {\n    \"valid\": false,\n    \"invalid_items\":
+        [\n      \"invalid_ingredient: \u003citem\u003e explanation why it''s invalid\",\n      ...\n    ]\n  }\n-
+        Do NOT continue to steps 2 if step 1 fails.\n\n---\n**STEP 2: Validate DIET
+        TYPE restrictions** (skip if ''diet_type'' is \"None\" or empty)\n- If \"keto\":
+        Disallow high-carb items like sugar, honey, wheat flour, bread, pasta, potatoes,
+        etc. Allow meats, eggs, fish, dairy, eggs, nuts, seeds, oils, low-carb vegetables
+        as they are keto friendly.\n- If \"vegan\": Disallow meat, fish, dairy, eggs,
+        honey, or any animal-derived ingredient. Allow fruits, vegetables, grains,
+        legumes, nuts, seeds, oils, etc as they are vegan friendly.\n- If ANY `ingredient`
+        violates the diet rules, return:\n  {\n    \"valid\": false,\n    \"invalid_items\":
+        [\n      \"invalid_ingredient: \u003citem\u003e explanation why it''s invalid
+        in scope of the \u003cdiet_type\u003e diet\",\n      ...\n    ]\n  }\n\n---\n**FINAL
+        RESULT**\n- If all steps pass (or steps are skipped appropriately), return:\n  {\n    \"valid\":
+        true\n  }\n\n**Important**: Return only pure JSON—no additional text or explanation.\n"}],"temperature":0.8}'
+    headers:
+      Content-Type:
+      - application/json
+      Authorization:
+      - Bearer <OPENAI_GROQ_API_KEY>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 02 Jan 2025 11:29:14 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Cf-Ray:
+      - 8fba6902783370bb-WAW
+      Cf-Cache-Status:
+      - DYNAMIC
+      Cache-Control:
+      - private, max-age=0, no-store, no-cache, must-revalidate
+      Vary:
+      - Origin, Accept-Encoding
+      Via:
+      - 1.1 google
+      Alt-Svc:
+      - h3=":443"; ma=86400
+      X-Groq-Region:
+      - us-west-1
+      X-Ratelimit-Limit-Requests:
+      - '14400'
+      X-Ratelimit-Limit-Tokens:
+      - '30000'
+      X-Ratelimit-Remaining-Requests:
+      - '14399'
+      X-Ratelimit-Remaining-Tokens:
+      - '29549'
+      X-Ratelimit-Reset-Requests:
+      - 6s
+      X-Ratelimit-Reset-Tokens:
+      - 902ms
+      X-Request-Id:
+      - req_01jgkcdqgcf64shb6xss7n9ydk
+      Set-Cookie:
+      - __cf_bm=aXJGwTC0YfOt40PaM6WHY2ans6kJ4QPsfdrcwPc_Nwg-1735817354-1.0.1.1-2Af5z4yd_XjDImB74OpPSz1vAKnBoDa_llgUYP09PdAZKGP0qNy4wPrJCoUvRLWsikAuWc.kz3nGn1v3i7NcEw;
+        path=/; expires=Thu, 02-Jan-25 11:59:14 GMT; domain=.groq.com; HttpOnly; Secure;
+        SameSite=None
+      Server:
+      - cloudflare
+    body:
+      encoding: ASCII-8BIT
+      string: '{"id":"chatcmpl-c2592eab-1eb4-4bef-a11d-b1f13410898a","object":"chat.completion","created":1735817354,"model":"llama3-8b-8192","choices":[{"index":0,"message":{"role":"assistant","content":"{\n   \"valid\":
+        true\n}"},"logprobs":null,"finish_reason":"stop"}],"usage":{"queue_time":0.019978182999999997,"prompt_tokens":488,"prompt_time":0.059791076,"completion_tokens":8,"completion_time":0.006666667,"total_tokens":496,"total_time":0.066457743},"system_fingerprint":"fp_a97cfe35ae","x_groq":{"id":"req_01jgkcdqgcf64shb6xss7n9ydk"}}
+
+        '
+  recorded_at: Thu, 02 Jan 2025 11:29:14 GMT
+recorded_with: VCR 6.3.1
