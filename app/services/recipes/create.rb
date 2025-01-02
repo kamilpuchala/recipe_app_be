@@ -21,7 +21,7 @@ module Recipes
     private
 
     def create_recipe
-      llm_service.call(content: recipe_content, temperature: 0.8)
+      llm_service.call(content: recipe_content, temperature: 0.5)
     end
 
     def recipe_content

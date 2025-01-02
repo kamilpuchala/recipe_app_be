@@ -21,7 +21,7 @@ module Recipes
     private
 
     def validate_llm_ingredients
-      llm_service.call(content: content, temperature: 0.8)
+      llm_service.call(content: content, temperature: 0.5)
     end
 
     def content
