@@ -4,8 +4,10 @@ module Api
       def create
         validate_user_input
 
-        recipe = Recipes::Create.new(ingredients: recipe_params[:ingredients],
-          diet_type: recipe_params[:diet_type]).call
+        recipe = Recipes::Create.new(
+          ingredients: recipe_params[:ingredients],
+          diet_type: recipe_params[:diet_type]
+        ).call
 
         render json: {recipe: recipe}, status: :ok
       rescue Errors::Recipes::InvalidUserInputError,
