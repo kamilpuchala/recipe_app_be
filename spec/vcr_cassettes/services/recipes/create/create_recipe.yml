@@ -1,0 +1,195 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.groq.com/openai/v1/chat/completions
+    body:
+      encoding: UTF-8
+      string: '{"model":"llama3-8b-8192","response_format":{"type":"json_object"},"messages":[{"role":"user","content":"You
+        are an experienced chef.\n\nRequirements:\n1. You MUST use exactly these required
+        ingredients: [\"tomato\", \"cucumber\"] you can also add some additional like
+        spices or less important ingredients.\n   - Each ingredient must include a
+        quantity in the final JSON output.\n   - The JSON structure for ingredients
+        must be:\n     \"ingredients\": [\n       { \"quantity\": \"...\", \"name\":
+        \"...\" },\n       { \"quantity\": \"...\", \"name\": \"...\" }\n     ]\n2.
+        If a diet type is specified (vegan), the final recipe must be suitable for
+        that diet.\n   - For example, if diet_type is \"vegan\" you cannot use any
+        animal products;\n     if \"vegetarian\" you cannot include meat or fish.\n\nIf
+        it is IMPOSSIBLE to build a recipe under these conditions\n(e.g., diet_type
+        is \"vegan\" but a required ingredient is \"chicken\"s),\nIT''S VERY IMPORTANT
+        TO RETURN A JSON OBJECT WITH A \"fail\" KEY if DIET has exclusions and that
+        ingredient is included.\nTHEN RETURN ONLY THIS JSON (no extra text or formatting):\n{\n  \"fail\":
+        \"Short explanation of why we can''t build the recipe\"\n}\n\nOTHERWISE, return
+        ONLY this JSON (no extra text or formatting):\n{\n  \"title\": \"...\",\n  \"description\":
+        \"... (Extend a short info about the recipe. If a diet_type is given, mention
+        why it suits that diet.)\",\n  \"ingredients\": [\n    { \"quantity\": \"...\",
+        \"name\": \"...\" },\n    ...\n  ],\n  \"steps\": [\n    { \"step\": \"...\"
+        },\n    { \"step\": \"...\" }\n  ]\n}\n"}],"temperature":0.8}'
+    headers:
+      Content-Type:
+      - application/json
+      Authorization:
+      - Bearer <OPENAI_GROQ_API_KEY>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 02 Jan 2025 11:23:12 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Cf-Ray:
+      - 8fba60276c8deec7-WAW
+      Cf-Cache-Status:
+      - DYNAMIC
+      Cache-Control:
+      - private, max-age=0, no-store, no-cache, must-revalidate
+      Vary:
+      - Origin, Accept-Encoding
+      Via:
+      - 1.1 google
+      Alt-Svc:
+      - h3=":443"; ma=86400
+      X-Groq-Region:
+      - us-west-1
+      X-Ratelimit-Limit-Requests:
+      - '14400'
+      X-Ratelimit-Limit-Tokens:
+      - '30000'
+      X-Ratelimit-Remaining-Requests:
+      - '14394'
+      X-Ratelimit-Remaining-Tokens:
+      - '28218'
+      X-Ratelimit-Reset-Requests:
+      - 35.502999999s
+      X-Ratelimit-Reset-Tokens:
+      - 3.564s
+      X-Request-Id:
+      - req_01jgkc2n8cfjtv39ccn2vhajg9
+      Set-Cookie:
+      - __cf_bm=ePZWKrUgt32E2Kd52f_GyjDQYx.073RtzMXQTgrwMBM-1735816992-1.0.1.1-w5lB1d5WdLE6xvm38cKXgwo5gbwfDedgYZLeNAOGszfoIZ9P5F_oaQPo4h6Z5LoXSbl02K8KMYJlY4n6wyNzsg;
+        path=/; expires=Thu, 02-Jan-25 11:53:12 GMT; domain=.groq.com; HttpOnly; Secure;
+        SameSite=None
+      Server:
+      - cloudflare
+    body:
+      encoding: ASCII-8BIT
+      string: '{"id":"chatcmpl-37b639d8-1800-4cf1-890e-eccd6fbb3de9","object":"chat.completion","created":1735816992,"model":"llama3-8b-8192","choices":[{"index":0,"message":{"role":"assistant","content":"{\n   \"title\":
+        \"Tomato and Cucumber Salad\",\n   \"description\": \"A refreshing salad perfect
+        for warm days. This recipe is vegan as it doesn''t include any animal products.\",\n   \"ingredients\":
+        [\n      { \"quantity\": \"2\", \"name\": \"tomato\" },\n      { \"quantity\":
+        \"1\", \"name\": \"cucumber\" },\n      { \"quantity\": \"1/4 teaspoon\",
+        \"name\": \"salt\" },\n      { \"quantity\": \"1/4 teaspoon\", \"name\": \"pepper\"
+        }\n   ],\n   \"steps\": [\n      { \"step\": \"Cut the tomatoes and cucumber
+        into small pieces.\" },\n      { \"step\": \"Mix the ingredients together
+        in a bowl. Add salt and pepper to taste.\" }\n   ]\n}"},"logprobs":null,"finish_reason":"stop"}],"usage":{"queue_time":0.017579554999999997,"prompt_tokens":370,"prompt_time":0.045409874,"completion_tokens":161,"completion_time":0.134166667,"total_tokens":531,"total_time":0.179576541},"system_fingerprint":"fp_a97cfe35ae","x_groq":{"id":"req_01jgkc2n8cfjtv39ccn2vhajg9"}}
+
+        '
+  recorded_at: Thu, 02 Jan 2025 11:23:12 GMT
+- request:
+    method: post
+    uri: https://api.groq.com/openai/v1/chat/completions
+    body:
+      encoding: UTF-8
+      string: '{"model":"llama3-8b-8192","response_format":{"type":"json_object"},"messages":[{"role":"user","content":"You
+        are a strict validator of the following LLM output:\n\n{\"title\"=\u003e\"Tomato
+        and Cucumber Salad\", \"description\"=\u003e\"A refreshing salad perfect for
+        warm days. This recipe is vegan as it doesn''t include any animal products.\",
+        \"ingredients\"=\u003e[{\"quantity\"=\u003e\"2\", \"name\"=\u003e\"tomato\"},
+        {\"quantity\"=\u003e\"1\", \"name\"=\u003e\"cucumber\"}, {\"quantity\"=\u003e\"1/4
+        teaspoon\", \"name\"=\u003e\"salt\"}, {\"quantity\"=\u003e\"1/4 teaspoon\",
+        \"name\"=\u003e\"pepper\"}], \"steps\"=\u003e[{\"step\"=\u003e\"Cut the tomatoes
+        and cucumber into small pieces.\"}, {\"step\"=\u003e\"Mix the ingredients
+        together in a bowl. Add salt and pepper to taste.\"}]}\n\nThe valid output
+        must be in **pure JSON** with EXACTLY one of these formats:\n\n1) **Failure
+        format** (if the recipe can''t be built or an error occurred):\n{\n  \"fail\":
+        \"Short explanation\"\n}\n\n\n**Validation Rules**:\n- The response must be
+        valid JSON (no extra text, no markdown).\n- If it''s the recipe format, all
+        keys (title, description, ingredients, steps) HAVE TO be present.\n  - \"ingredients\"
+        must be an array of objects, each with \"quantity\" and \"name\".\n  - \"steps\"
+        must be an array of objects, each with \"step\".\n- If it''s the failure format,
+        ONLY the \"fail\" key with a short explanation string is allowed.\n- No extra
+        keys are allowed in either format.\n- Any other structure or missing fields
+        is invalid.\n\nNow, **strictly** check if the above LLM output is valid or
+        not. Return ONLY one of these two JSON objects:\n\n1. If the LLM output is
+        fully valid:\n{\n  \"valid\": true\n}\n\n2. If the LLM output is invalid (not
+        JSON, missing fields, extra keys, or nonsense):\n{\n  \"valid\": false,\n  \"reasons\":
+        [\n    \"reason explaining what went wrong\",\n    ...\n  ]\n}\n\nNo extra
+        text or formatting—return ONLY one of these two JSON objects.\n"}],"temperature":0.7}'
+    headers:
+      Content-Type:
+      - application/json
+      Authorization:
+      - Bearer <OPENAI_GROQ_API_KEY>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 02 Jan 2025 11:23:12 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Cf-Ray:
+      - 8fba602a6e7aef97-WAW
+      Cf-Cache-Status:
+      - DYNAMIC
+      Cache-Control:
+      - private, max-age=0, no-store, no-cache, must-revalidate
+      Vary:
+      - Origin, Accept-Encoding
+      Via:
+      - 1.1 google
+      Alt-Svc:
+      - h3=":443"; ma=86400
+      X-Groq-Region:
+      - us-west-1
+      X-Ratelimit-Limit-Requests:
+      - '14400'
+      X-Ratelimit-Limit-Tokens:
+      - '30000'
+      X-Ratelimit-Remaining-Requests:
+      - '14393'
+      X-Ratelimit-Remaining-Tokens:
+      - '27854'
+      X-Ratelimit-Reset-Requests:
+      - 41.510999999s
+      X-Ratelimit-Reset-Tokens:
+      - 4.291s
+      X-Request-Id:
+      - req_01jgkc2nqkewyt0rjs7bg158cg
+      Set-Cookie:
+      - __cf_bm=fepjckMgcFSvOw36bbgosXgBiYbKbYh4hA9DvaKtOkA-1735816992-1.0.1.1-X2tsJHvGpjxaq8Jxp0eaTifXrZezm6zRMZJAro6qwxrRm6GMLCKaAZEYG4cCVx5.PKoNKEsLTqakKMLp0eFWfA;
+        path=/; expires=Thu, 02-Jan-25 11:53:12 GMT; domain=.groq.com; HttpOnly; Secure;
+        SameSite=None
+      Server:
+      - cloudflare
+    body:
+      encoding: ASCII-8BIT
+      string: '{"id":"chatcmpl-b9326fbf-499b-459d-958c-078dd85a9ffc","object":"chat.completion","created":1735816992,"model":"llama3-8b-8192","choices":[{"index":0,"message":{"role":"assistant","content":"{\n   \"valid\":
+        true\n}"},"logprobs":null,"finish_reason":"stop"}],"usage":{"queue_time":0.018922395,"prompt_tokens":449,"prompt_time":0.055649234,"completion_tokens":7,"completion_time":0.005833333,"total_tokens":456,"total_time":0.061482567},"system_fingerprint":"fp_6a6771ae9c","x_groq":{"id":"req_01jgkc2nqkewyt0rjs7bg158cg"}}
+
+        '
+  recorded_at: Thu, 02 Jan 2025 11:23:12 GMT
+recorded_with: VCR 6.3.1

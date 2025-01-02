@@ -7,20 +7,19 @@ module Recipes
         You are an experienced chef.
 
         Requirements:
-        1. You MUST use exactly these required ingredients: %{ingredients}.
+        1. You MUST use exactly these required ingredients: %{ingredients} you can also add some additional like spices or less important ingredients.
            - Each ingredient must include a quantity in the final JSON output.
            - The JSON structure for ingredients must be:
              "ingredients": [
                { "quantity": "...", "name": "..." },
                { "quantity": "...", "name": "..." }
              ]
-        2. If there are any excluded ingredients, do NOT include them under any circumstance: %{excluded_ingredients}.
-        3. If a diet type is specified (%{diet_type}), the final recipe must be suitable for that diet.
+        2. If a diet type is specified (%{diet_type}), the final recipe must be suitable for that diet.
            - For example, if diet_type is "vegan" you cannot use any animal products;
              if "vegetarian" you cannot include meat or fish.
 
         If it is IMPOSSIBLE to build a recipe under these conditions
-        (e.g., diet_type is "vegan" but a required ingredient is "chicken"),
+        (e.g., diet_type is "vegan" but a required ingredient is "chicken"s),
         IT'S VERY IMPORTANT TO RETURN A JSON OBJECT WITH A "fail" KEY if DIET has exclusions and that ingredient is included.
         THEN RETURN ONLY THIS JSON (no extra text or formatting):
         {
@@ -42,10 +41,9 @@ module Recipes
         }
       PROMPT
 
-      def self.prompt(ingredients, excluded_ingredients = [], diet_type = nil)
+      def self.prompt(ingredients, diet_type = nil)
         PROMPT_TEMPLATE % {
           ingredients: ingredients,
-          excluded_ingredients: excluded_ingredients || "None",
           diet_type: diet_type || "None"
         }
       end

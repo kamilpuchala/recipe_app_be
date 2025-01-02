@@ -5,9 +5,8 @@ module LlmChats
 
       BASE_MODEL = "llama3-8b-8192"
       ALLOWED_ROLES = %w[user assistant]
-      ALLOWED_PARSED_RESPONSE_TYPES = %w[json text raw]
 
-      def initialize(client: ::ExternalServices::Llm::Chat::Groq.client)
+      def initialize(client: ::ExternalServices::Llm::Chat::Groq.new.client)
         super
       end
 
@@ -29,14 +28,10 @@ module LlmChats
 
       private
 
-      def parsed_response_text(response)
-        response["choices"][0]["message"]["content"]
-      end
-
       def valid_role(role)
-        raise ArgumentError, "Invalid role" unless role_valid?(role)
+        return role if role_valid?(role)
 
-        role
+        raise ArgumentError, "Invalid role"
       end
 
       def role_valid?(role)
@@ -44,9 +39,9 @@ module LlmChats
       end
 
       def valid_content(content)
-        raise ArgumentError, "Invalid content" unless content_valid?(content)
+        return content if content_valid?(content)
 
-        content
+        raise ArgumentError, "Invalid content"
       end
 
       def content_valid?(content)
@@ -54,9 +49,9 @@ module LlmChats
       end
 
       def valid_temperature(temperature)
-        raise ArgumentError, "Invalid temperature" unless temperature_valid?(temperature)
+        return temperature if temperature_valid?(temperature)
 
-        temperature
+        raise ArgumentError, "Invalid temperature"
       end
 
       def temperature_valid?(temperature)
