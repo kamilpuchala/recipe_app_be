@@ -25,7 +25,7 @@ This project is a proof-of-concept API built with **Ruby on Rails 7.1.5.1** (usi
    
 For access to API key use your own or please contact the author.\
 Currently the needed API key is Groq API key which you can generate here: [Groq API key](https://console.groq.com/keys)
-.
+
 3. **Install the dependencies**
    ```bash
    bundle install
